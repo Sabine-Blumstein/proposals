@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical Proposal — [Project Title] | Water Connect Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a18;
+    --ink-light: #4a4a45;
+    --ink-muted: #8a8a82;
+    --water: #1d6b8a;
+    --water-light: #e8f4f8;
+    --water-mid: #a8d4e3;
+    --sand: #f5f0e8;
+    --sand-deep: #e8dfc8;
+    --white: #fdfcfa;
+    --accent: #c47a3a;
+    --accent-light: #f5e8d8;
+    --border: rgba(26,26,24,0.12);
+    --section-gap: 80px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(253,252,250,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; font-weight: 600; letter-spacing: 0.02em;
+    color: var(--ink); text-decoration: none;
+  }
+  .nav-links {
+    display: flex; gap: 28px; list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px; font-weight: 400; color: var(--ink-light);
+    text-decoration: none; letter-spacing: 0.03em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--water); }
+  .nav-cta {
+    font-size: 13px; font-weight: 500;
+    color: var(--water); border: 1px solid var(--water);
+    padding: 7px 18px; border-radius: 2px;
+    text-decoration: none; transition: all 0.2s;
+    letter-spacing: 0.03em;
+  }
+  .nav-cta:hover { background: var(--water); color: white; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 140px 40px 80px;
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 340px; gap: 80px; align-items: start;
+  }
+  .hero-eyebrow {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--water);
+    margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 32px; height: 1px; background: var(--water);
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 5vw, 58px);
+    font-weight: 300; line-height: 1.15;
+    color: var(--ink); margin-bottom: 28px;
+    letter-spacing: -0.01em;
+  }
+  .hero-title em { font-style: italic; color: var(--water); }
+  .hero-subtitle {
+    font-size: 17px; font-weight: 300; color: var(--ink-light);
+    line-height: 1.75; max-width: 560px; margin-bottom: 40px;
+  }
+  .hero-meta {
+    display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 40px;
+  }
+  .meta-item { display: flex; flex-direction: column; gap: 4px; }
+  .meta-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--ink-muted);
+  }
+  .meta-value { font-size: 15px; font-weight: 400; color: var(--ink); }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500; letter-spacing: 0.04em;
+    background: var(--water); color: white;
+    padding: 13px 28px; border-radius: 2px; border: none;
+    cursor: pointer; text-decoration: none;
+    transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: #155570; }
+  .btn-secondary {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 400; letter-spacing: 0.04em;
+    background: transparent; color: var(--ink);
+    padding: 13px 28px; border-radius: 2px;
+    border: 1px solid var(--border);
+    cursor: pointer; text-decoration: none;
+    transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-secondary:hover { border-color: var(--ink-light); }
+
+  /* ── VIDEO CARD (right column) ── */
+  .video-card {
+    background: var(--sand);
+    border: 1px solid var(--sand-deep);
+    border-radius: 4px; overflow: hidden;
+    position: sticky; top: 72px;
+  }
+  .video-wrapper {
+    position: relative; padding-bottom: 56.25%; background: var(--ink);
+    overflow: hidden;
+  }
+  .video-wrapper iframe, .video-wrapper video {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    border: none;
+  }
+  .video-placeholder {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 14px; cursor: pointer;
+    background: linear-gradient(160deg, #1a3a48 0%, #0d2530 100%);
+  }
+  .play-btn {
+    width: 54px; height: 54px; border-radius: 50%;
+    background: rgba(255,255,255,0.15); border: 1.5px solid rgba(255,255,255,0.4);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.25s;
+  }
+  .play-btn:hover { background: rgba(255,255,255,0.25); transform: scale(1.05); }
+  .play-btn svg { margin-left: 3px; }
+  .video-placeholder p {
+    font-size: 13px; color: rgba(255,255,255,0.7); letter-spacing: 0.05em;
+  }
+  .video-caption {
+    padding: 16px 20px;
+    border-top: 1px solid var(--sand-deep);
+  }
+  .video-caption p { font-size: 13px; color: var(--ink-light); line-height: 1.5; }
+  .video-caption strong { color: var(--ink); font-weight: 500; }
+
+  /* ── SECTION WRAPPER ── */
+  .section {
+    max-width: 1100px; margin: 0 auto;
+    padding: var(--section-gap) 40px;
+    border-top: 1px solid var(--border);
+  }
+  .section-header {
+    display: grid; grid-template-columns: 200px 1fr; gap: 60px;
+    margin-bottom: 48px; align-items: start;
+  }
+  .section-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px; font-weight: 300; color: var(--sand-deep);
+    line-height: 1; letter-spacing: -0.02em;
+  }
+  .section-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--water); margin-bottom: 10px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(26px, 3vw, 36px); font-weight: 300; line-height: 1.25;
+    color: var(--ink);
+  }
+  .section-body { grid-column: 2; }
+
+  /* ── STATS STRIP ── */
+  .stats-strip {
+    background: var(--water);
+    padding: 48px 40px;
+  }
+  .stats-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px;
+  }
+  .stat { text-align: center; }
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px; font-weight: 300; color: white;
+    line-height: 1; margin-bottom: 8px;
+  }
+  .stat-label {
+    font-size: 12px; font-weight: 400; letter-spacing: 0.08em;
+    color: rgba(255,255,255,0.7); text-transform: uppercase;
+  }
+
+  /* ── UNDERSTANDING / CONTEXT ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+  .prose p { margin-bottom: 20px; color: var(--ink-light); font-size: 16px; line-height: 1.8; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose strong { color: var(--ink); font-weight: 500; }
+
+  /* ── METHODOLOGY STEPPER ── */
+  .methodology-phases {
+    display: flex; flex-direction: column; gap: 0;
+    border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
+  }
+  .phase {
+    border-bottom: 1px solid var(--border);
+    cursor: pointer; transition: background 0.2s;
+  }
+  .phase:last-child { border-bottom: none; }
+  .phase-header {
+    display: flex; align-items: center; gap: 20px;
+    padding: 20px 28px; user-select: none;
+  }
+  .phase-number-badge {
+    width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+    background: var(--water-light); color: var(--water);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 500;
+    transition: all 0.25s;
+  }
+  .phase.active .phase-number-badge { background: var(--water); color: white; }
+  .phase-title-wrap { flex: 1; }
+  .phase-title { font-size: 15px; font-weight: 500; color: var(--ink); }
+  .phase-subtitle { font-size: 13px; color: var(--ink-muted); margin-top: 2px; }
+  .phase-duration {
+    font-size: 12px; color: var(--ink-muted); letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+  .phase-chevron {
+    width: 18px; height: 18px; color: var(--ink-muted);
+    transition: transform 0.3s;
+  }
+  .phase.active .phase-chevron { transform: rotate(180deg); }
+  .phase-body {
+    padding: 0 28px 0 84px;
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+  }
+  .phase.active .phase-body { padding: 0 28px 24px 84px; }
+  .phase-content {
+    font-size: 15px; color: var(--ink-light); line-height: 1.75;
+    padding-top: 4px;
+  }
+  .phase-tasks {
+    margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .task-chip {
+    font-size: 12px; padding: 5px 14px; border-radius: 20px;
+    background: var(--water-light); color: var(--water);
+    border: 1px solid var(--water-mid); letter-spacing: 0.02em;
+  }
+
+  /* ── TIMELINE VISUAL ── */
+  .timeline {
+    position: relative; padding: 8px 0;
+    margin-top: 16px;
+  }
+  .timeline-track {
+    height: 4px; background: var(--sand-deep); border-radius: 2px;
+    position: relative; overflow: visible;
+  }
+  .timeline-milestones {
+    display: flex; justify-content: space-between;
+    margin-top: 16px;
+  }
+  .milestone { text-align: center; flex: 1; }
+  .milestone-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--water); margin: 0 auto 8px;
+    position: relative; top: -19px;
+    border: 2px solid white; box-shadow: 0 0 0 1.5px var(--water);
+  }
+  .milestone-label { font-size: 11px; color: var(--ink-muted); line-height: 1.4; }
+  .milestone-label strong { display: block; color: var(--ink); font-size: 12px; font-weight: 500; }
+
+  /* ── TEAM ── */
+  .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .team-card {
+    border: 1px solid var(--border); border-radius: 4px;
+    overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .team-card:hover { border-color: var(--water-mid); box-shadow: 0 4px 20px rgba(29,107,138,0.08); }
+  .team-photo {
+    height: 180px; background: var(--water-light);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px; font-weight: 300; color: var(--water);
+    overflow: hidden;
+  }
+  .team-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .team-info { padding: 20px; }
+  .team-name {
+    font-size: 16px; font-weight: 500; color: var(--ink); margin-bottom: 3px;
+  }
+  .team-role {
+    font-size: 13px; color: var(--water); margin-bottom: 12px; font-weight: 400;
+  }
+  .team-bio { font-size: 14px; color: var(--ink-light); line-height: 1.65; margin-bottom: 14px; }
+  .team-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 11px; padding: 4px 10px; border-radius: 2px;
+    background: var(--sand); color: var(--ink-muted);
+    border: 1px solid var(--sand-deep);
+  }
+
+  /* ── BUDGET VIZ ── */
+  .budget-visual {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
+  }
+  .budget-chart-wrap { position: relative; }
+  .budget-chart-wrap canvas { max-width: 100%; }
+  .budget-breakdown { display: flex; flex-direction: column; gap: 14px; }
+  .budget-line {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 0; border-bottom: 1px solid var(--border);
+  }
+  .budget-line:last-child { border-bottom: none; }
+  .budget-swatch { width: 12px; height: 12px; border-radius: 2px; flex-shrink: 0; }
+  .budget-item { flex: 1; }
+  .budget-item-name { font-size: 14px; font-weight: 400; color: var(--ink); }
+  .budget-item-note { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
+  .budget-pct {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 300; color: var(--ink);
+  }
+
+  /* ── EXPERIENCE / CREDENTIALS ── */
+  .exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .exp-card {
+    padding: 28px; border: 1px solid var(--border); border-radius: 4px;
+    position: relative; overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .exp-card:hover { border-color: var(--water-mid); }
+  .exp-card::before {
+    content: ''; position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%; background: var(--water);
+  }
+  .exp-client {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--water); margin-bottom: 8px;
+  }
+  .exp-title { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 8px; line-height: 1.4; }
+  .exp-desc { font-size: 14px; color: var(--ink-light); line-height: 1.65; }
+  .exp-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 14px; }
+
+  /* ── WHY US ── */
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .why-card { padding: 0; }
+  .why-icon {
+    width: 44px; height: 44px; background: var(--water-light);
+    border-radius: 4px; display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px;
+  }
+  .why-title { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 10px; }
+  .why-text { font-size: 14px; color: var(--ink-light); line-height: 1.7; }
+
+  /* ── CLOSING ── */
+  .closing {
+    background: var(--ink);
+    padding: 80px 40px;
+    text-align: center;
+  }
+  .closing-inner { max-width: 640px; margin: 0 auto; }
+  .closing h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px; font-weight: 300; color: white;
+    margin-bottom: 20px; line-height: 1.25;
+  }
+  .closing h2 em { font-style: italic; color: var(--water-mid); }
+  .closing p { font-size: 16px; color: rgba(255,255,255,0.6); margin-bottom: 36px; line-height: 1.75; }
+  .closing-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-white {
+    font-size: 14px; font-weight: 500; letter-spacing: 0.04em;
+    background: white; color: var(--ink);
+    padding: 13px 28px; border-radius: 2px; border: none;
+    cursor: pointer; text-decoration: none;
+    transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-white:hover { background: var(--sand); }
+  .btn-ghost {
+    font-size: 14px; font-weight: 400; letter-spacing: 0.04em;
+    background: transparent; color: white;
+    padding: 13px 28px; border-radius: 2px;
+    border: 1px solid rgba(255,255,255,0.25);
+    cursor: pointer; text-decoration: none;
+    transition: all 0.25s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.5); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--sand); border-top: 1px solid var(--sand-deep);
+    padding: 32px 40px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; font-weight: 600; color: var(--ink);
+  }
+  .footer-meta { font-size: 13px; color: var(--ink-muted); }
+
+  /* ── FADE IN ── */
+  .fade-in {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; gap: 48px; }
+    .video-card { position: static; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .section-header { grid-template-columns: 1fr; gap: 8px; }
+    .section-number { font-size: 40px; }
+    .section-body { grid-column: 1; }
+    .two-col, .three-col, .team-grid, .exp-grid, .why-grid, .budget-visual,
+    .team-grid { grid-template-columns: 1fr; }
+  }
+
+  @media print {
+    nav, .hero-actions, .closing-actions, .btn-primary, .btn-secondary { display: none; }
+    .section { padding: 40px; }
+    .fade-in { opacity: 1 !important; transform: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">Water Connect Consulting</a>
+  <ul class="nav-links">
+    <li><a href="#understanding">Understanding</a></li>
+    <li><a href="#methodology">Methodology</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#budget">Budget</a></li>
+  </ul>
+  <a href="#" class="nav-cta" onclick="downloadPDF()">↓ Download PDF</a>
+</nav>
+
+<!-- HERO -->
+<section style="background: var(--white);">
+  <div class="hero">
+    <div class="fade-in">
+      <div class="hero-eyebrow">Technical Proposal</div>
+      <h1 class="hero-title">
+        [Evaluation Title]<br>
+        <em>[Programme or Project Name]</em>
+      </h1>
+      <p class="hero-subtitle">
+        Submitted in response to the Terms of Reference issued by [Client Organization].
+        Water Connect Consulting brings deep expertise in water stewardship, corporate water risk,
+        and international development evaluation to this assignment.
+      </p>
+      <div class="hero-meta">
+        <div class="meta-item">
+          <span class="meta-label">Client</span>
+          <span class="meta-value">[GIZ / SDC / Sida / FAO]</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Submission Date</span>
+          <span class="meta-value">[DD Month YYYY]</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Evaluation Period</span>
+          <span class="meta-value">[Start] – [End]</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">Assignment Duration</span>
+          <span class="meta-value">[X] months</span>
+        </div>
+      </div>
+      <div class="hero-actions">
+        <a href="#methodology" class="btn-primary">View Our Approach →</a>
+        <a href="#" class="btn-secondary" onclick="downloadPDF()">↓ Download Full Proposal</a>
+      </div>
+    </div>
+
+    <!-- VIDEO GREETING -->
+    <div class="video-card fade-in" style="transition-delay: 0.2s">
+      <div class="video-wrapper">
+        <!-- OPTION A: Loom embed — replace src with your Loom URL -->
+        <!-- <iframe src="https://www.loom.com/embed/YOUR_LOOM_ID" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->
+
+        <!-- OPTION B: Direct video file upload -->
+        <!-- <video controls><source src="greeting.mp4" type="video/mp4"></video> -->
+
+        <!-- PLACEHOLDER (remove once video is added) -->
+        <div class="video-placeholder" onclick="this.innerHTML='<p style=color:white;padding:20px>Add your Loom URL or video file above</p>'">
+          <div class="play-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <p>Personal greeting from Sabine</p>
+        </div>
+      </div>
+      <div class="video-caption">
+        <p><strong>Sabine [Last Name]</strong>, Principal Consultant<br>
+        Water Connect Consulting — a brief introduction to our approach for this evaluation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat fade-in">
+      <div class="stat-number">[X]</div>
+      <div class="stat-label">Years in water stewardship</div>
+    </div>
+    <div class="stat fade-in" style="transition-delay:0.1s">
+      <div class="stat-number">[X]+</div>
+      <div class="stat-label">Evaluations completed</div>
+    </div>
+    <div class="stat fade-in" style="transition-delay:0.2s">
+      <div class="stat-number">[X]</div>
+      <div class="stat-label">Countries covered</div>
+    </div>
+    <div class="stat fade-in" style="transition-delay:0.3s">
+      <div class="stat-number">[X]</div>
+      <div class="stat-label">Expert days proposed</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 1: UNDERSTANDING -->
+<section class="section fade-in" id="understanding">
+  <div class="section-header">
+    <div class="section-number">01</div>
+    <div>
+      <div class="section-label">Our understanding</div>
+      <h2 class="section-title">Context &amp; evaluation rationale</h2>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="two-col prose">
+      <div>
+        <p>
+          <strong>[Programme/project name]</strong> has been implemented since [year] with the objective of
+          [brief programme description]. This evaluation is commissioned at a [midterm/final/etc.] stage
+          to assess relevance, effectiveness, efficiency, impact, and sustainability of the intervention.
+        </p>
+        <p>
+          We understand the core evaluation questions to be:
+          (i) [EQ1];
+          (ii) [EQ2];
+          (iii) [EQ3].
+          Our methodology is designed to address each of these with the appropriate mix of
+          qualitative and quantitative methods.
+        </p>
+      </div>
+      <div>
+        <p>
+          The evaluation context presents specific considerations around [data availability / stakeholder
+          geography / political sensitivity] that we have accounted for in our design. We have
+          evaluated similar programmes for [GIZ / SDC / Sida] and are familiar with the reporting
+          standards and quality assurance expectations.
+        </p>
+        <p>
+          Our team brings direct experience in [relevant geography or sector], which will
+          enable efficient primary data collection and credible stakeholder engagement
+          from the first days of the assignment.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: METHODOLOGY -->
+<section class="section fade-in" id="methodology">
+  <div class="section-header">
+    <div class="section-number">02</div>
+    <div>
+      <div class="section-label">Technical approach</div>
+      <h2 class="section-title">Methodology &amp; evaluation design</h2>
+    </div>
+  </div>
+  <div class="section-body">
+
+    <div class="prose" style="margin-bottom: 36px;">
+      <p>
+        Our approach is grounded in a <strong>mixed-methods design</strong> that triangulates
+        evidence from primary interviews, document review, and quantitative analysis of
+        programme data. Click each phase below to explore the activities and outputs.
+      </p>
+    </div>
+
+    <div class="methodology-phases">
+      <div class="phase active" onclick="togglePhase(this)">
+        <div class="phase-header">
+          <div class="phase-number-badge">1</div>
+          <div class="phase-title-wrap">
+            <div class="phase-title">Inception &amp; desk review</div>
+            <div class="phase-subtitle">Framework development and document analysis</div>
+          </div>
+          <div class="phase-duration">Weeks 1–2</div>
+          <svg class="phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="phase-body">
+          <div class="phase-content">
+            Review of programme documentation, logframe/results matrix, and available M&amp;E data.
+            Development of the detailed Evaluation Framework including evaluation questions,
+            indicators, data sources, and methods per question. Stakeholder mapping and
+            scheduling. Submission of Inception Report for client review.
+          </div>
+          <div class="phase-tasks">
+            <span class="task-chip">Document review</span>
+            <span class="task-chip">Evaluation matrix</span>
+            <span class="task-chip">Stakeholder mapping</span>
+            <span class="task-chip">Inception Report</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase" onclick="togglePhase(this)">
+        <div class="phase-header">
+          <div class="phase-number-badge">2</div>
+          <div class="phase-title-wrap">
+            <div class="phase-title">Primary data collection</div>
+            <div class="phase-subtitle">Interviews, surveys, and field visits</div>
+          </div>
+          <div class="phase-duration">Weeks 3–6</div>
+          <svg class="phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="phase-body">
+          <div class="phase-content">
+            Key informant interviews (KIIs) with [N] stakeholders across [implementing agency,
+            beneficiaries, government partners, donors]. Focus group discussions where relevant.
+            Field visits to [target geographies]. Online survey with [target group] if applicable.
+            All data collection conducted against the Evaluation Framework developed in Phase 1.
+          </div>
+          <div class="phase-tasks">
+            <span class="task-chip">KII interviews ([N])</span>
+            <span class="task-chip">Focus groups</span>
+            <span class="task-chip">Field visits</span>
+            <span class="task-chip">Survey</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase" onclick="togglePhase(this)">
+        <div class="phase-header">
+          <div class="phase-number-badge">3</div>
+          <div class="phase-title-wrap">
+            <div class="phase-title">Analysis &amp; synthesis</div>
+            <div class="phase-subtitle">Evidence triangulation across DAC criteria</div>
+          </div>
+          <div class="phase-duration">Weeks 7–9</div>
+          <svg class="phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="phase-body">
+          <div class="phase-content">
+            Systematic coding and analysis of qualitative data. Quantitative analysis of
+            programme performance data against targets. Triangulation of evidence across
+            sources and methods. Preliminary findings discussion with client team.
+            Development of conclusions and forward-looking recommendations.
+          </div>
+          <div class="phase-tasks">
+            <span class="task-chip">Qualitative coding</span>
+            <span class="task-chip">Data triangulation</span>
+            <span class="task-chip">Findings workshop</span>
+            <span class="task-chip">Recommendations</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase" onclick="togglePhase(this)">
+        <div class="phase-header">
+          <div class="phase-number-badge">4</div>
+          <div class="phase-title-wrap">
+            <div class="phase-title">Reporting &amp; dissemination</div>
+            <div class="phase-subtitle">Draft and final evaluation report</div>
+          </div>
+          <div class="phase-duration">Weeks 10–12</div>
+          <svg class="phase-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="phase-body">
+          <div class="phase-content">
+            Submission of Draft Report for client comments. Revision addressing all comments.
+            Submission of Final Evaluation Report. Executive Summary suitable for public
+            dissemination. Presentation of findings to client and key stakeholders if required.
+          </div>
+          <div class="phase-tasks">
+            <span class="task-chip">Draft Report</span>
+            <span class="task-chip">Client review cycle</span>
+            <span class="task-chip">Final Report</span>
+            <span class="task-chip">Executive Summary</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div style="margin-top: 40px;">
+      <div style="font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 20px;">Indicative timeline</div>
+      <div class="timeline">
+        <div class="timeline-track">
+          <div style="position:absolute;top:0;left:0;width:33%;height:100%;background:var(--water);border-radius:2px;opacity:0.3;"></div>
+        </div>
+        <div class="timeline-milestones">
+          <div class="milestone">
+            <div class="milestone-dot"></div>
+            <div class="milestone-label"><strong>Week 1</strong>Kick-off call</div>
+          </div>
+          <div class="milestone">
+            <div class="milestone-dot"></div>
+            <div class="milestone-label"><strong>Week 2</strong>Inception Report</div>
+          </div>
+          <div class="milestone">
+            <div class="milestone-dot"></div>
+            <div class="milestone-label"><strong>Week 6</strong>Field phase ends</div>
+          </div>
+          <div class="milestone">
+            <div class="milestone-dot"></div>
+            <div class="milestone-label"><strong>Week 10</strong>Draft Report</div>
+          </div>
+          <div class="milestone">
+            <div class="milestone-dot" style="background: var(--accent); box-shadow: 0 0 0 1.5px var(--accent);"></div>
+            <div class="milestone-label"><strong>Week 12</strong>Final Report</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 3: TEAM -->
+<section class="section fade-in" id="team">
+  <div class="section-header">
+    <div class="section-number">03</div>
+    <div>
+      <div class="section-label">Proposed team</div>
+      <h2 class="section-title">Expertise &amp; roles</h2>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-photo">
+          <!-- Replace with: <img src="photo-sabine.jpg" alt="Sabine"> -->
+          SB
+        </div>
+        <div class="team-info">
+          <div class="team-name">Sabine [Last Name]</div>
+          <div class="team-role">Team Leader &amp; Principal Evaluator</div>
+          <p class="team-bio">
+            Over [X] years in water stewardship and sustainability evaluation.
+            Expertise in corporate water risk, CDP disclosure, and SBTN alignment.
+            Fluent in English and [German/French/other].
+          </p>
+          <div class="team-tags">
+            <span class="tag">Water stewardship</span>
+            <span class="tag">SCS-116</span>
+            <span class="tag">CDP Water</span>
+            <span class="tag">SBTN</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-photo">
+          <!-- Replace with: <img src="photo-expert2.jpg" alt="Expert 2"> -->
+          EX
+        </div>
+        <div class="team-info">
+          <div class="team-name">[Expert 2 Name]</div>
+          <div class="team-role">Thematic Specialist / Local Expert</div>
+          <p class="team-bio">
+            [Brief bio: key expertise, language skills, relevant country experience.
+            Tailor to the specific evaluation context and geography.]
+          </p>
+          <div class="team-tags">
+            <span class="tag">[Expertise 1]</span>
+            <span class="tag">[Geography]</span>
+            <span class="tag">[Language]</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="team-card">
+        <div class="team-photo">EX</div>
+        <div class="team-info">
+          <div class="team-name">[Expert 3 Name] <em style="font-size:12px;color:var(--ink-muted);font-style:normal">(optional)</em></div>
+          <div class="team-role">Data / M&amp;E Specialist</div>
+          <p class="team-bio">
+            [Quantitative methods, survey design, data analysis. Add or remove
+            team members as appropriate to the scope.]
+          </p>
+          <div class="team-tags">
+            <span class="tag">M&amp;E</span>
+            <span class="tag">Mixed methods</span>
+            <span class="tag">[Tool/software]</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: EXPERIENCE -->
+<section class="section fade-in" id="experience">
+  <div class="section-header">
+    <div class="section-number">04</div>
+    <div>
+      <div class="section-label">Track record</div>
+      <h2 class="section-title">Relevant experience</h2>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="exp-grid">
+      <div class="exp-card">
+        <div class="exp-client">[GIZ / Sida / SDC]</div>
+        <div class="exp-title">[Evaluation title — Programme name, Country]</div>
+        <p class="exp-desc">
+          [2–3 sentences: what was evaluated, methods used, key findings or outputs.
+          Emphasise elements directly relevant to this ToR.]
+        </p>
+        <div class="exp-tags">
+          <span class="tag">[Method]</span>
+          <span class="tag">[Sector]</span>
+          <span class="tag">[Year]</span>
+        </div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-client">[FAO / GWP / Other]</div>
+        <div class="exp-title">[Evaluation or research title, Country/Region]</div>
+        <p class="exp-desc">
+          [2–3 sentences on scope and relevance. If confidential, describe
+          at programme level without naming client.]
+        </p>
+        <div class="exp-tags">
+          <span class="tag">[Method]</span>
+          <span class="tag">[Sector]</span>
+          <span class="tag">[Year]</span>
+        </div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-client">[Client]</div>
+        <div class="exp-title">[Reference project 3]</div>
+        <p class="exp-desc">[Description]</p>
+        <div class="exp-tags">
+          <span class="tag">[Method]</span><span class="tag">[Year]</span>
+        </div>
+      </div>
+      <div class="exp-card">
+        <div class="exp-client">[Client]</div>
+        <div class="exp-title">[Reference project 4]</div>
+        <p class="exp-desc">[Description]</p>
+        <div class="exp-tags">
+          <span class="tag">[Method]</span><span class="tag">[Year]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: BUDGET -->
+<section class="section fade-in" id="budget">
+  <div class="section-header">
+    <div class="section-number">05</div>
+    <div>
+      <div class="section-label">Financial proposal</div>
+      <h2 class="section-title">Budget overview</h2>
+    </div>
+  </div>
+  <div class="section-body">
+    <p class="prose" style="margin-bottom:32px; color: var(--ink-light); font-size:15px;">
+      The detailed budget is submitted as a separate Excel file using the client's template.
+      The visual below shows the overall allocation by cost category.
+    </p>
+    <div class="budget-visual">
+      <div class="budget-chart-wrap">
+        <canvas id="budgetChart" width="300" height="300"></canvas>
+      </div>
+      <div class="budget-breakdown">
+        <div class="budget-line">
+          <div class="budget-swatch" style="background:#1d6b8a"></div>
+          <div class="budget-item">
+            <div class="budget-item-name">Personnel (international)</div>
+            <div class="budget-item-note">Team leader + international expert days</div>
+          </div>
+          <div class="budget-pct" id="pct0">45%</div>
+        </div>
+        <div class="budget-line">
+          <div class="budget-swatch" style="background:#5aa8c5"></div>
+          <div class="budget-item">
+            <div class="budget-item-name">Personnel (local / national)</div>
+            <div class="budget-item-note">Local expert, interpreter, field support</div>
+          </div>
+          <div class="budget-pct" id="pct1">20%</div>
+        </div>
+        <div class="budget-line">
+          <div class="budget-swatch" style="background:#c47a3a"></div>
+          <div class="budget-item">
+            <div class="budget-item-name">Travel &amp; subsistence</div>
+            <div class="budget-item-note">Flights, accommodation, per diem</div>
+          </div>
+          <div class="budget-pct" id="pct2">20%</div>
+        </div>
+        <div class="budget-line">
+          <div class="budget-swatch" style="background:#e8dfc8"></div>
+          <div class="budget-item">
+            <div class="budget-item-name">Other direct costs</div>
+            <div class="budget-item-note">Translation, printing, events</div>
+          </div>
+          <div class="budget-pct" id="pct3">10%</div>
+        </div>
+        <div class="budget-line">
+          <div class="budget-swatch" style="background:#8a8a82"></div>
+          <div class="budget-item">
+            <div class="budget-item-name">Overhead / indirect</div>
+            <div class="budget-item-note">Admin, quality assurance</div>
+          </div>
+          <div class="budget-pct" id="pct4">5%</div>
+        </div>
+        <div style="padding-top:16px; border-top: 2px solid var(--ink);">
+          <div style="display:flex; justify-content:space-between; align-items:baseline;">
+            <span style="font-size:14px; font-weight:500; color:var(--ink);">Total (excl. taxes)</span>
+            <span style="font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:300; color:var(--ink);">[CHF / EUR / USD X,XXX]</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: WHY US -->
+<section class="section fade-in">
+  <div class="section-header">
+    <div class="section-number">06</div>
+    <div>
+      <div class="section-label">Value proposition</div>
+      <h2 class="section-title">Why Water Connect Consulting</h2>
+    </div>
+  </div>
+  <div class="section-body">
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1d6b8a" stroke-width="1.5"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+        </div>
+        <div class="why-title">Deep sector expertise</div>
+        <p class="why-text">
+          Specialist knowledge in water stewardship, WASH, and water governance — not a
+          generalist evaluator applying standard templates to a sector we don't know.
+        </p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1d6b8a" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="why-title">Responsive and lean</div>
+        <p class="why-text">
+          As an independent consultancy, we offer direct access to the team leader
+          throughout the assignment — no overhead, no account management layer,
+          full accountability.
+        </p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1d6b8a" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="why-title">Multilateral experience</div>
+        <p class="why-text">
+          Familiar with the reporting standards, quality expectations, and institutional
+          cultures of [GIZ, SDC, Sida, FAO] — we know what good looks like for each client.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<div class="closing fade-in">
+  <div class="closing-inner">
+    <h2>Ready to discuss<br><em>our approach?</em></h2>
+    <p>
+      We welcome any questions on the methodology, team composition, or budget before
+      the submission deadline. We are available for a call at short notice.
+    </p>
+    <div class="closing-actions">
+      <a href="mailto:sabine@waterconnectconsulting.com" class="btn-white">Get in touch →</a>
+      <a href="#" class="btn-ghost" onclick="downloadPDF()">↓ Download PDF</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Water Connect Consulting</div>
+  <div class="footer-meta">
+    Submitted [Date] · Confidential · [City, Country]
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>
+  // ── Fade-in on scroll ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // ── Phase accordion ──
+  function togglePhase(el) {
+    const isActive = el.classList.contains('active');
+    document.querySelectorAll('.phase').forEach(p => {
+      p.classList.remove('active');
+      p.querySelector('.phase-body').style.maxHeight = '0';
+    });
+    if (!isActive) {
+      el.classList.add('active');
+      const body = el.querySelector('.phase-body');
+      body.style.maxHeight = body.scrollHeight + 'px';
+    }
+  }
+  // Open first phase on load
+  const firstBody = document.querySelector('.phase.active .phase-body');
+  if (firstBody) firstBody.style.maxHeight = firstBody.scrollHeight + 'px';
+
+  // ── Budget donut chart ──
+  const ctx = document.getElementById('budgetChart').getContext('2d');
+  const budgetData = {
+    labels: ['Intl personnel','Local personnel','Travel','Other costs','Overhead'],
+    datasets: [{
+      data: [45, 20, 20, 10, 5],
+      backgroundColor: ['#1d6b8a','#5aa8c5','#c47a3a','#e8dfc8','#8a8a82'],
+      borderWidth: 3,
+      borderColor: '#fdfcfa',
+      hoverOffset: 6
+    }]
+  };
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: budgetData,
+    options: {
+      cutout: '68%',
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => ' ' + ctx.label + ': ' + ctx.parsed + '%'
+          }
+        }
+      },
+      animation: { animateRotate: true, duration: 900 }
+    }
+  });
+
+  // ── PDF Download ──
+  function downloadPDF() {
+    window.print();
+  }
+</script>
+
+</body>
+</html>
